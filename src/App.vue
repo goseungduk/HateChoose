@@ -1,11 +1,4 @@
 <template>
-  <!-- <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div> -->
   <div>
     <router-view></router-view>
   </div>
@@ -14,3 +7,6 @@
 <style>
 
 </style>
+<!-- ES6 에서 export default 로 모듈 추출 -->
+<!-- https://www.youtube.com/watch?v=k1cZiYKZxKs -->
+<!-- https://new93helloworld.tistory.com/322 -->

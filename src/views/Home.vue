@@ -9,8 +9,8 @@
         <region-select class="regionselect" :regions="regions" v-model="selected"></region-select>
       </div>
 
-      <b-button @click="gotoFullRandom()" variant="primary" pill class="mt-5">Full Random</b-button>
-      <b-button @click="gotoBanPick()" variant="secondary" pill class="ml-3 mt-5">BanPick</b-button>
+      <b-button @click="gotoFullRandom()" variant="primary" pill class="mt-5">Choose!</b-button>
+      <!-- <b-button @click="gotoBanPick()" variant="secondary" pill class="ml-3 mt-5">BanPick</b-button> -->
     </b-jumbotron>
     <b-container></b-container>
   </div>
@@ -25,10 +25,11 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Router from "vue-router";
 import Component from "vue-class-component";
 import { Prop, Watch } from "vue-property-decorator";
 import { getModule } from "vuex-module-decorators";
-import Router from "vue-router";
+
 
 import NavBar from "../components/NavBar.vue";
 import RegionSelect from "../components/RegionSelect.vue";
@@ -48,31 +49,42 @@ const sessionState = getModule(SessionStore);
     RegionSelect
   }
 })
-export default class Home extends Vue {
-  selected: Region | null = null;
+/**
+* Home.vue 에서 사용할 컴포넌트 명시.
+* NavBar 와 RegionSelect Form 컴포넌트 두 개가 이용될 것임.
+@ author : goseungduk
+@ version : 1.0.0
+*/
+export default class Home extends Vue 
+{
+	selected: Region | null = null;
 
-  get regions() {
-    return regionState.regions;
-  }
+	get regions() {
+		return regionState.regions;
+	}
 
-  created() {
-    regionState.updateRegions();
-  }
+  	created() {
+		regionState.updateRegions();
+	}
+	
+	gotoFullRandom() {
+    	if (this.selected) {
+      		sessionState.setRegion(this.selected);
+      		this.$router.push({ name: "fullrandom" });
+    	}
+		else{
+			alert("!지역을 선택해주세요!"); // modal로 수정해야함.
+		}
+  	}
 
-  
-
-  gotoFullRandom() {
-    if (this.selected) {
-      sessionState.setRegion(this.selected);
-      this.$router.push({ path: "fullrandom" });
-    }
-  }
-
-  gotoBanPick() {
-    if (this.selected) {
-      sessionState.setRegion(this.selected);
-      this.$router.push({ path: "banpick"});
-    }
-  }
+	// gotoBanPick() {
+	// if (this.selected) {
+	// 	sessionState.setRegion(this.selected);
+	// this.$router.push({ name: "banpick"});
+	// }
+	// else{
+	// 	alert("!지역을 선택해주세요!"); // modal로 수정해야함.
+	// }
+	// }
 }
 </script>

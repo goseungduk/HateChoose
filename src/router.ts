@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { getModule } from "vuex-module-decorators";
+
 import Home from './views/Home.vue'
 import BanPickSelect from './views/BanPickSelect.vue'
 import FullRandomSelect from './views/FullRandomSelect.vue'
 import NotFound from './views/NotFound.vue'
-
-
-import { getModule } from "vuex-module-decorators";
 import SessionStore from "./store/SessionStore";
 
 const sessionState = getModule(SessionStore);
-
+/**
+* Home : 지역선택이 가능한 컴포넌트
+* BanPickSelect :
+* FullRandomSelect :
+* NotFound :
+* SessionStore : 
+*/
 
 Vue.use(Router)
 
